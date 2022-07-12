@@ -31,13 +31,13 @@ namespace Application.Activities
 
                 try
                 {
-                    // To simulate / Fake a cancellation request, below is used.
-                    for(var i = 0; i<10; i++)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
-                        await Task.Delay(1000,cancellationToken);
-                        _logger.LogInformation($"Task {i} was cancelled");
-                    }
+                    // // To simulate / Fake a cancellation request, below is used.
+                    // for(var i = 0; i<10; i++)
+                    // {
+                    //     cancellationToken.ThrowIfCancellationRequested();
+                    //     await Task.Delay(1000,cancellationToken);
+                    //     _logger.LogInformation($"Task {i} was cancelled");
+                    // }
                 }
                 catch(Exception ex) when (ex is TaskCanceledException)
                 {
