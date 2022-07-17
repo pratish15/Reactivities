@@ -3,13 +3,12 @@ import {  Container } from 'semantic-ui-react';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { observer } from "mobx-react-lite";
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ActivityForm from '../../features/activities/form/ActivityForm';
 import HomePage from '../../features/home/HomePage';
 import ActivityDetails from '../../features/activities/details/ActivityDetails';
 
 function App() {
-const location = useLocation();
   return (
     <Fragment>
         <NavBar/>

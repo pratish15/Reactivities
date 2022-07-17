@@ -5,7 +5,6 @@ import { observer } from 'mobx-react-lite';
 import { Link, useNavigate   , useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponents';
 import {v4 as uuid} from 'uuid';
-import ActivityDashboard from '../dashboard/ActivityDashboard';
 
 export default observer(function ActivityForm(){
     const {activityStore} = useStore();
