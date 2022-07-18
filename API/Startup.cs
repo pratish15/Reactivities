@@ -14,10 +14,12 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Application.Activities;
 using Application.Core;
 using API.Extensions;
+using API.Middleware;
 
 namespace API
 {
@@ -34,16 +36,22 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(config =>{
+                config.RegisterValidatorsFromAssemblyContaining<Create>();
+            });
+            
             services.AddApplicationServices(_config);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // use custom exception handling middleware
+            app.UseMiddleware<ExceptionMiddleware>();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                // swap below exception middleware with custom ExceptionMiddleware
+                // app.UseDeveloperExceptionPage(); // Exception middleware must be on top
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
